@@ -64,6 +64,59 @@ namespace RevCookBookASP.Models
                 .HasOne(pt => pt.Ingredient)
                 .WithMany(t => t.Categories)
                 .HasForeignKey(pt => pt.IngredientId);
+
+            seedData(modelBuilder);
+        }
+
+        protected void seedData(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Ingredient>().HasData(
+                new Ingredient { IngredientId = 1, Name = "Chleb" },
+                new Ingredient { IngredientId = 2, Name = "Masło" }
+            );
+
+            modelBuilder.Entity<Language>().HasData(new Language[]
+            {
+                new Language() { LanguageId = 1, LanguageCode = "EN" },
+                new Language() { LanguageId = 2, LanguageCode = "PL" }
+            });
+
+            modelBuilder.Entity<Category>().HasData(
+                new Category { CategoryId = 1, Name = "Pieczywo" },
+                new Category { CategoryId = 2, Name = "Nabiał" }
+            );
+
+            modelBuilder.Entity<Dish>().HasData(
+                new Dish { DishId = 1, Name = "Kanapka z masłem", Time = "2 min" }
+
+            );
+
+            modelBuilder.Entity<Recipe>().HasData(
+                new Recipe
+                {
+                    RecipeId = 1,
+                    Text = "Do a sandwitch",
+                    LanguageId = 1,
+                    DishId = 1
+                },
+                new Recipe
+                {
+                    RecipeId = 2,
+                    Text = "Zrób kanapkę",
+                    LanguageId = 2,
+                    DishId = 1
+                }
+            );
+
+            modelBuilder.Entity<DishIngredient>().HasData(
+                new DishIngredient { DishId = 1, IngredientId = 1, Amount = 1 },
+                new DishIngredient { DishId = 1, IngredientId = 2, Amount = 1 }
+            );
+
+            modelBuilder.Entity<IngredientCategory>().HasData(
+                new IngredientCategory { CategoryId = 1, IngredientId = 1 },
+                new IngredientCategory { CategoryId = 1, IngredientId = 2 }
+            );
         }
     }
 }
