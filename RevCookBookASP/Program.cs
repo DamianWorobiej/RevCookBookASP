@@ -19,6 +19,10 @@ namespace RevCookBookASP
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    config.AddJsonFile("connectionstrings.json", optional: false, reloadOnChange: false);
+                })
                 .UseStartup<Startup>();
     }
 }

@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "RevCookBookConnection": "Server=Server;Database=Database;Trusted_Connection=True;MultipleActiveResultSets=true"
+  }
+}
