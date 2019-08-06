@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RevCookBookASP.Models;
 
 namespace RevCookBookASP.Migrations
 {
     [DbContext(typeof(RevCookBookContext))]
-    partial class RevCookBookContextModelSnapshot : ModelSnapshot
+    [Migration("20190806175241_AddIdsToRecipeModel")]
+    partial class AddIdsToRecipeModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
