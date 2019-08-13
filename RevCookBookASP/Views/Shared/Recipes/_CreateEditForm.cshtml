@@ -9,7 +9,7 @@
     <input type="hidden" asp-for="RecipeId" />
     <div class="form-group">
         @Html.LabelFor(model => model.Text)
-        <textarea asp-for="Text" class="form-control"></textarea>
+        @Html.TextAreaFor(model => model.Text)
         @Html.ValidationMessageFor(model => model.Text)
     </div>
     <div class="form-group">
