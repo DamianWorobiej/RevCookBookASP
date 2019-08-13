@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RevCookBookASP.Models;
+using RevCookBookASP.ViewModels;
 
 namespace RevCookBookASP.Controllers
 {
@@ -21,7 +22,11 @@ namespace RevCookBookASP.Controllers
         // GET: Recipes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Recipes.ToListAsync());
+            var recipes = await _context.Recipes
+                .Include(recipeEntity => recipeEntity.Dish)
+                .Include(recipeEntity => recipeEntity.Language)
+                .ToListAsync();
+            return View(recipes);
         }
 
         // GET: Recipes/Details/5
@@ -33,19 +38,24 @@ namespace RevCookBookASP.Controllers
             }
 
             var recipe = await _context.Recipes
+                .Include(recipeEntity => recipeEntity.Dish)
+                .Include(recipeEntity => recipeEntity.Language)
                 .FirstOrDefaultAsync(m => m.RecipeId == id);
             if (recipe == null)
             {
                 return NotFound();
             }
+            var recipeViewModel = new RecipeViewModel(_context, recipe);
 
-            return View(recipe);
+            return View(recipeViewModel);
         }
 
         // GET: Recipes/Create
         public IActionResult Create()
         {
-            return View();
+            var recipeViewModel = new RecipeViewModel(_context);
+
+            return View(recipeViewModel);
         }
 
         // POST: Recipes/Create
@@ -53,7 +63,7 @@ namespace RevCookBookASP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RecipeId,Text")] Recipe recipe)
+        public async Task<IActionResult> Create([Bind("RecipeId,Text,DishId,LanguageId")] Recipe recipe)
         {
             if (ModelState.IsValid)
             {
@@ -72,12 +82,15 @@ namespace RevCookBookASP.Controllers
                 return NotFound();
             }
 
-            var recipe = await _context.Recipes.FindAsync(id);
+            var recipe = await _context.Recipes
+                .FindAsync(id);
             if (recipe == null)
             {
                 return NotFound();
             }
-            return View(recipe);
+            var recipeViewModel = new RecipeViewModel(_context, recipe);
+
+            return View(recipeViewModel);
         }
 
         // POST: Recipes/Edit/5
@@ -85,7 +98,7 @@ namespace RevCookBookASP.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RecipeId,Text")] Recipe recipe)
+        public async Task<IActionResult> Edit(int id, [Bind("RecipeId,Text,DishId,LanguageId")] Recipe recipe)
         {
             if (id != recipe.RecipeId)
             {
@@ -124,6 +137,8 @@ namespace RevCookBookASP.Controllers
             }
 
             var recipe = await _context.Recipes
+                .Include(recipeEntity => recipeEntity.Dish)
+                .Include(recipeEntity => recipeEntity.Language)
                 .FirstOrDefaultAsync(m => m.RecipeId == id);
             if (recipe == null)
             {

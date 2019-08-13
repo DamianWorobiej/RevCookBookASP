@@ -1,4 +1,4 @@
-﻿@model RevCookBookASP.Models.Recipe
+﻿@model RevCookBookASP.ViewModels.RecipeViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -15,8 +15,24 @@
             <input type="hidden" asp-for="RecipeId" />
             <div class="form-group">
                 <label asp-for="Text" class="control-label"></label>
-                <input asp-for="Text" class="form-control" />
+                <textarea asp-for="Text" class="form-control"></textarea>
                 <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DishId" class="control-label">
+                    @Html.DisplayNameFor(model => model.Dish)
+                </label>
+                <div>
+                    @Html.DropDownList("DishId", Model.DishesList, String.Empty)
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="LanguageId" class="control-label">
+                    @Html.DisplayNameFor(model => model.Language)
+                </label>
+                <div>
+                    @Html.DropDownList("LanguageId", Model.LanguagesList)
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />

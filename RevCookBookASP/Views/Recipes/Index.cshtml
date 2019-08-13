@@ -13,7 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Text)
+                @Html.DisplayNameFor(model => model.Dish.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Language.LanguageCode)
             </th>
             <th></th>
         </tr>
@@ -22,7 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Text)
+                @Html.DisplayFor(modelItem => item.Dish.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Language.LanguageCode)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.RecipeId">Edit</a> |
