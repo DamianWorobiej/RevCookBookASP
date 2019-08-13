@@ -33,6 +33,19 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            CMS
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a asp-area="" asp-controller="Dishes" asp-action="Index">Dishes</a></li>
+                            <li><a asp-area="" asp-controller="Ingredients" asp-action="Index">Ingredients</a></li>
+                            <li><a asp-area="" asp-controller="Categories" asp-action="Index">Categories</a></li>
+                            <li><a asp-area="" asp-controller="Recipes" asp-action="Index">Recipes</a></li>
+                            <li><a asp-area="" asp-controller="Languages" asp-action="Index">Languages</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
