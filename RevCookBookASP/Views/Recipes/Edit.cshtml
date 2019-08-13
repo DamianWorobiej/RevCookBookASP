@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Edit";
+    ViewData["FormSubmitButtonValue"] = "Save";
 }
 
 <h2>Edit</h2>
@@ -10,39 +11,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="RecipeId" />
-            <div class="form-group">
-                <label asp-for="Text" class="control-label"></label>
-                <textarea asp-for="Text" class="form-control"></textarea>
-                <span asp-validation-for="Text" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DishId" class="control-label">
-                    @Html.DisplayNameFor(model => model.Dish)
-                </label>
-                <div>
-                    @Html.DropDownList("DishId", Model.DishesList, String.Empty)
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="LanguageId" class="control-label">
-                    @Html.DisplayNameFor(model => model.Language)
-                </label>
-                <div>
-                    @Html.DropDownList("LanguageId", Model.LanguagesList)
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+        @Html.Partial("Recipes/_CreateEditForm")
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {
