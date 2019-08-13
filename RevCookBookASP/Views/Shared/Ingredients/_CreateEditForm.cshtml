@@ -1,0 +1,28 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model RevCookBookASP.ViewModels.IngredientViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="IngredientId" />
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+        @*<label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>*@
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Categories)
+        @Html.ListBox("CategoriesIds", Model.CategoriesList, new { multiple = "", size = 5 })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="@ViewData["FormSubmitButtonValue"]" class="btn btn-default" />
+    </div>
+}
